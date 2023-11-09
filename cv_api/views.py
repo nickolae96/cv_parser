@@ -13,17 +13,15 @@ file_path = Path().parent.joinpath('dummy_resume.pdf')
 class CVDataAPIView(views.APIView):
     '''Api view which displays CV data depending on url'''
 
-    def get(self, request, *args, **kwargs):
-        get_section = request.get_full_path().strip('/').split('/')[-1]
+    def get(self, request, section, *args, **kwargs):
         pdf_service = PDFService(file_path)
-
-        if get_section == 'all':
+        if section == 'all':
             if not pdf_service.list_resume_sections():
                 # return not found error when no sections where found in the CV
                 return Response({'message': 'CV data not found'}, status=status.HTTP_404_NOT_FOUND)
             serializer = CVSerializer(data=pdf_service.resume_dict)
         else:
-            cv_section = pdf_service.get_appropriate_section(get_section)
+            cv_section = pdf_service.get_appropriate_section(section)
             if not cv_section:
                 # return not found error when requested section was not found
                 return Response({'message': 'Section info not found'}, status=status.HTTP_404_NOT_FOUND)
