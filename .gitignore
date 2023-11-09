@@ -12,6 +12,8 @@ media
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
+.idea/**/vcs.xml
+.idea/
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
@@ -103,6 +105,9 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+Scripts/
+Include/
+Lib/
 
 # mkdocs documentation
 /site
